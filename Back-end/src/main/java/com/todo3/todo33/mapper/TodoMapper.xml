@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        
+<mapper namespace="com.todo3.todo33.mapper.TodoMapper">
+  <select id="selectAll" resultType="com.todo3.todo33.entity.Todo">
+    select * from lists
+    <!-- select * from lists INNER JOIN cards ON lists.id = cards.list_id; -->
+  </select>
+
+  <insert id="add" parameterType="com.todo3.todo33.entity.Todo">
+    insert into lists (title)
+    values (#{title})
+  </insert>
+
+  <delete id="delete" parameterType="com.todo3.todo33.entity.Todo">
+    <!-- delete from lists where id=#{id} -->
+    delete from lists where title=#{title}
+  </delete>
+
+</mapper>
