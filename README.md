@@ -1,4 +1,12 @@
 # Vue To-do
+You can develope applications like Trello.
+
+Java,SpringBoot
+Vue.js
+PostgreSQL
+# Demo
+ 
+![](https://media.github.tools.sap/user/54379/files/ab809493-d6df-4a10-8471-c5c1ba4e540a)
 
 ## Project setup
 ```
