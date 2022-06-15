@@ -9,7 +9,7 @@
                :list="cards"
                @end="$emit('change')">
       <Card v-for="(item, index) in cards"
-            :body="item.body"
+            :card_title="item.card_title"
             :key="item.id"
             :cardIndex="index"
             :listIndex="listIndex"
@@ -43,6 +43,10 @@ export default {
       type: Array,
       required: true
     },
+    // list_id: {
+    //   type: Number,
+    //   required: true
+    // }
   },
   computed: {
     totalCardInList() {
@@ -60,6 +64,7 @@ export default {
             console.log("DeleteEndPoint",deleteEndpoint)
             console.log("list",list)
             console.log("listIndex",this.listIndex)
+            console.log("listIndex",this.key)
 
             if(confirm('本当にこのリストを削除しますか？')){
               this.$store.dispatch('removelist', { listIndex: this.listIndex })

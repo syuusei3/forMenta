@@ -53,6 +53,7 @@ export default {
     addCardToList: function() {
       this.$store.dispatch('addCardToList', { body: this.body, listIndex: this.listIndex })
       this.body = ''
+      console.log('methods addCardToList ListIndex:',this.lists[JSON.stringify(this.listIndex)])
     }
   }
 }

@@ -4,19 +4,40 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
         
 <mapper namespace="com.todo3.todo33.mapper.TodoMapper">
-  <select id="selectAll" resultType="com.todo3.todo33.entity.Todo">
+
+                      <!--   Lists   -->
+  <select id="selectAllLists" resultType="com.todo3.todo33.entity.TodoLists">
     select * from lists
     <!-- select * from lists INNER JOIN cards ON lists.id = cards.list_id; -->
   </select>
-
-  <insert id="add" parameterType="com.todo3.todo33.entity.Todo">
-    insert into lists (title)
-    values (#{title})
+  <insert id="addLists" parameterType="com.todo3.todo33.entity.TodoLists">
+    <!-- insert into lists (title)
+    values (#{title}) -->
+    insert into lists (id,title)
+    values (#{id},#{title})
   </insert>
-
-  <delete id="delete" parameterType="com.todo3.todo33.entity.Todo">
+  <delete id="deleteLists" parameterType="com.todo3.todo33.entity.TodoLists">
     <!-- delete from lists where id=#{id} -->
     delete from lists where title=#{title}
+  </delete>
+
+
+                  <!--     cards         -->
+  <select id="selectAllCards" resultType="com.todo3.todo33.entity.TodoCards">
+    select * from cards 
+    <!-- select * from lists LEFT JOIN cards ON lists.id = cards.list_id; -->
+  </select>
+
+  <insert id="addCards" parameterType="com.todo3.todo33.entity.TodoCards">
+    insert into cards (card_title,list_id)
+    values (#{title},#{list_id})
+    <!-- insert into lists (id,title)
+    values (#{id},#{title}) -->
+  </insert>
+
+  <delete id="deleteCards" parameterType="com.todo3.todo33.entity.TodoCards">
+    <!-- delete from lists where id=#{id} -->
+    delete from cards where title=#{card_title}
   </delete>
 
 </mapper>

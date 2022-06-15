@@ -10,8 +10,8 @@
                   @end="movingList"
                   class="list-index">
         <List v-for="(item, index) in lists"
-              :key="item.id"
-              :title="item.title"
+              :key="item.list_id"
+              :title="item.list_title"
               :cards="item.cards"
               :listIndex="index"
               @change="movingCard"
@@ -48,6 +48,10 @@ export default {
     },
     movingList: function() {
       this.$store.dispatch('updateList', { lists: this.lists })
+    },
+    addList(){
+      console.log('Boardvue Addlist Event')
+      this.$emit('addList')///event for reload
     }
   },
 }

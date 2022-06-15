@@ -1,22 +1,22 @@
 package com.todo3.todo33.mapper;
-
 import java.util.List;
-
+import javax.sql.rowset.CachedRowSet;
 import org.apache.ibatis.annotations.Mapper;
-
-import com.todo3.todo33.entity.Todo;
-
-
+import com.todo3.todo33.entity.TodoLists;
+import com.todo3.todo33.entity.TodoCards;
 
 //this file is interface for gettig method?????
-
 @Mapper
 public interface TodoMapper {
-    public List<Todo> selectAll();
-    public void add(Todo todo); //addLists
-    public void delete(Todo todo);//deleteLists
-    // public List<TodoCards> selectAll();
-    // public void add(TodoCards todo); //addLists
-    // public void delete(TodoCards todo);//deleteList
+    ////Lists////
+    public List<TodoLists> selectAllLists();
+    public void addLists(TodoLists todo); //addLists
+    public void deleteLists(TodoLists todo);//deleteLists
+
+    ///////cards//////
+    public List<TodoCards> selectAllCards();
+    public void addCards(TodoCards cards); //addCards
+    public void deleteCards(TodoCards cards);//deleteCards
 }
+
 

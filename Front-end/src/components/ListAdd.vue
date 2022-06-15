@@ -16,7 +16,6 @@
   </form>
 </template>
 
-
 <script>
 import axios from 'axios'
 
@@ -45,20 +44,22 @@ export default {
   },
   methods: {
     addList: function() {
-      this.$store.dispatch('addlist', { title: this.title })
+      
+      this.$store.dispatch('addlist', { id: new Date().getTime(), title: this.title })
       this.title = ''
     },
     addTodo(){
+      
       const addEndpoint = 'http://localhost:8000/addtodo';
-      console.log("AddEndPoint",addEndpoint)
+      console.log("AddEndPoint:",addEndpoint)
+    
       const todo = {
+        id: new Date().getTime(),
         title:this.title,
         //content:this.content
       }
-      axios.post(addEndpoint,todo)
-      .then((res)=> {
-        this.todos.push(res.data)
-      })
+      axios.post(addEndpoint,todo)//post to DB
+      //this.$emit('addList')///event for reload
     },
     startEditing: function() {
       this.isEditing = true

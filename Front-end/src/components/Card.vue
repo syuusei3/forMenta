@@ -4,14 +4,14 @@
       ×
     </button>
     <div class="body">
-      {{ body }}
+      {{ card_title }}
     </div>
   </div>
 </template>
 <script>
 export default {
   props: {
-    body: {
+    card_title: {
       type: String,
       required: true
     },
