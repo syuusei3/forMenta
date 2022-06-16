@@ -3,7 +3,7 @@
     <div class="listheader">
       <p class="list-title">{{ title }}</p>
       <!-- <p class="list-counter">total: {{ totalCardInList }}</p> -->
-      <div class="deletelist" @click="deleteTodo({title})">×</div>
+      <div class="deletelist" @click="deleteTodo()">×</div>
     </div>
     <draggable group="cards"
                :list="cards"
@@ -23,15 +23,15 @@ import draggable from 'vuedraggable'
 import CardAdd from './CardAdd'
 import Card from './Card'
 import axios from 'axios'
-
 export default {
   components: {
     CardAdd,
     Card,
     draggable
   },
+  //props from board
   props: {
-    title: {
+    title: {//this title was defined in Board
       type: String,
       required: true
     },
@@ -43,7 +43,11 @@ export default {
       type: Array,
       required: true
     },
-    // list_id: {
+    listID: {
+      type: Number,
+      required: true
+    },
+    // list_title: {
     //   type: Number,
     //   required: true
     // }
@@ -59,16 +63,23 @@ export default {
     //     this.$store.dispatch('removelist', { listIndex: this.listIndex })
     //   }
     // },
-    deleteTodo(list) {
+    deleteTodo() {
             const deleteEndpoint = 'http://localhost:8000/deletetodo';
             console.log("DeleteEndPoint",deleteEndpoint)
-            console.log("list",list)
+            //console.log("list",list)
             console.log("listIndex",this.listIndex)
-            console.log("listIndex",this.key)
-
+            console.log("listIndex",this.title)
+            //console.log("listtitle",this.list_title)
+            console.log("delete key",this.key)
+            //console.log("key",this.key)
             if(confirm('本当にこのリストを削除しますか？')){
-              this.$store.dispatch('removelist', { listIndex: this.listIndex })
-              axios.post(deleteEndpoint, list)
+              const tmplist = {
+                  id: this.listID,
+                  title:this.title,
+                  //content:this.content
+                  }
+              this.$store.dispatch('removelist', { listIndex: this.listIndex })//keyは定義しなくても良い？
+              axios.post(deleteEndpoint, tmplist)
             // .then((res)=> {
             //     this.lists = res.data.list;
             // })

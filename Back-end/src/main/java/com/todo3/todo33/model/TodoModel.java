@@ -17,16 +17,14 @@ public class TodoModel {
         public Card(String card_title) {
             this.card_title = card_title;
         }
+        // public Card(String card_title, long list_id) {
+        //     this.card_title = card_title;
+        //     this.list_id = list_id;
+        // }
     }
-
     public TodoModel(long list_id, String list_title){
         this.list_id = list_id;
         this.list_title = list_title;
         this.cards = new ArrayList<Card>();
     }
-    // public TodoModel(){
-    //     this.list_id = list_id;
-    //     this.list_title = list_title;
-    //     this.cards = new ArrayList<Card>();
-    // }
 }

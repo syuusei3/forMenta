@@ -35,6 +35,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.ArrayList;
 
+
 //@CrossOrigin(origins = "http://localhost:8080")
 @CrossOrigin(origins = "http://localhost:8082")
 @RestController
@@ -89,7 +90,7 @@ public class TodoController {
         public ResponseEntity<List<TodoModel>> getTodo(){
 
             List<TodoLists> lists = todoMapper.selectAllLists();//id,title
-            List<TodoCards> cards = todoMapper.selectAllCards();//id,title
+            List<TodoCards> cards = todoMapper.selectAllCards();//task_id,card_title,list_id
             List<TodoModel> tmpList = new ArrayList<TodoModel>();
             //List<Card> tmpcard = new ArrayList<Card>();
 
@@ -97,16 +98,32 @@ public class TodoController {
                 tmpList.add(new TodoModel(list.id, list.title));    
             });
 
+            System.out.println("!!!!!!!!!Send cardss !!!!!!");
             tmpList.forEach(todoModel -> {
                 cards.forEach(card -> {
                     if(todoModel.list_id == card.list_id) {
                         //todoModel.cards.add(new Card()));
                         todoModel.cards.add(new TodoModel.Card(card.card_title));
+                        System.out.println(todoModel.list_id + ":" + todoModel.list_title + ":" + card.card_title );
                     }
                 });
             });
 
             //List<TodoModel> tmpList = Arrays.asList(res1, res2, res3);
+            // System.out.println("!!!!!!!!!Send Lists !!!!!!");
+            // tmpList.forEach(todoModel -> {
+            //     cards.forEach(card -> {
+            //         System.out.println(todoModel.list_id + ":" + todoModel.list_title + ":" + card.card_title );
+            //     });
+            // });
+            
+            // tmpList.forEach(todoModel -> {
+            //     System.out.println(todoModel);
+            // });
+            //tmpList.forEach(list -> logger.info("{}",list));
+            //System.out.println(tmpList);
+            //System.out.println(tmpList.toString());
+         
 
             return new ResponseEntity<List<TodoModel>>(tmpList, HttpStatus.OK);
 /* 
@@ -114,40 +131,9 @@ public class TodoController {
             res1.cards = Arrays.asList("a", "b");
             res1.listName = "AAAAA";
 
-            TodoModel res2 = new TodoModel();
-            res2.cards = Arrays.asList("c", "d");
-            res2.listName = "BBBBB";
-
-            List<TodoLists> lists = todoMapper.selectAllLists();
-            TodoModel res3 = new TodoModel();
-            //res3.cards = Arrays.asList("e", "fffff");
-            res3.listName = "CCCC";
-            lists.forEach(
-                list ->  res3.cards = Arrays.asList("e",("{}",[list[0]]))
-                );
-                */
-            //return new ResponseEntity<List<TodoModel>>( Arrays.asList(res1, res2,res3), HttpStatus.OK);
-            //return new ResponseEntity<List<TodoModel>>( Arrays.asList(res1, res2, res3), HttpStatus.OK);
-        //try {
 /* 
             List<TodoLists> lists = todoMapper.selectAllLists();
             List<TodoCards> cards = todoMapper.selectAllCards();//selectALL into list
-
-            System.out.printf("!!!!!!!!cards!!!!!!!");
-            // lists.forEach(list->
-            //     cards.forEach(card -> logger.info("{}",card));
-            //     );
-
-            //logger.info("{}", cards);
-            // int num[];
-            // Map<Integer, String > aaa = new HashMap<>();
-            cards.forEach(card -> logger.info("{}", card.getCardTitle()));
-
-            cards.forEach(card -> logger.info("{}", card.getId()));
-            //cards.forEach(card -> list.setCard(card));
-
-            System.out.printf("!!!!!!!!!Lists!!!!!!");
-            //lists.add(3);
 
             //logger.info("{}", lists);
             System.out.printf("!!!!!!!!!Lists todos!!!!!!");
@@ -184,6 +170,8 @@ public class TodoController {
     @PostMapping("/deletetodo")
     public ResponseEntity<Object> deleteTodo(@RequestBody TodoLists todo){
         try {
+            System.out.println("!!!!!!!!!delettodo!!!!!!");
+            System.out.println(todo);
             todoMapper.deleteLists(todo);
 			return new ResponseEntity<Object>(HttpStatus.OK);
 		} catch(Exception ex) {

@@ -11,8 +11,9 @@
                   class="list-index">
         <List v-for="(item, index) in lists"
               :key="item.list_id"
-              :title="item.list_title"
+              :title="item.list_title" 
               :cards="item.cards"
+              :listID="item.list_id"
               :listIndex="index"
               @change="movingCard"
         />
@@ -26,8 +27,7 @@
 import draggable from 'vuedraggable'
 import ListAdd from './ListAdd.vue'
 import List from './List'
-import { mapState } from 'vuex'
-
+import { mapState } from 'vuex'  ///mapstate
 export default {
   components: {
     ListAdd,

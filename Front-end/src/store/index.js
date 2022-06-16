@@ -57,7 +57,7 @@ const store = new Vuex.Store({
   },
   mutations: {
     addlist(state, payload) {
-      state.lists.push({ id: payload.id, title: payload.title, cards:[] })
+      state.lists.push({ list_id: payload.list_id, list_title: payload.list_title, cards:[] })
       console.log('mutation:addlist',state.lists)
     },
     removelist(state, payload) {
