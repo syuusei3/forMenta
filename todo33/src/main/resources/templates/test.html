@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Test</title>
+</head>
+<body>
+  <h1>TodoList</h1>
+  <form method="post" th:action="@{~/add}">
+    <p>Title</p>
+    <input type="text" name="title" />
+    <p>Text</p>
+    <textarea type="text" name="content" rows="3" cols="50">write something....</textarea>
+    <input type="submit" value="追加" />
+  </form>
+
+  <p>Database's information</p>
+  <table>
+    <thead><tr><th>KEY</th><th>TITLE</th><th>TEXT</th></tr></thead>
+    <tbody>
+      <tr th:inline="text" th:each="todo : ${todos}">
+        <td> [[${todo.id}]]</td>
+        <td> [[${todo.title}]]</td>
+        <td> [[${todo.content}]]</td>
+
+        <td>
+          <form method="post" th:action="@{/delete}" >
+            <input type="hidden" name="id" th:value="${todo.id}">
+          <button type="submit" name="button">削除</button> 
+          </form>
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>

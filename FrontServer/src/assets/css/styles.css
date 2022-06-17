@@ -1,5 +1,5 @@
 html {
-    background: orange;
+    background: rgb(148, 217, 235);
     font-family: 'Avenir', Helvetica, Arial, 'system-ui', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -10,7 +10,7 @@ html {
 }
 
 header {
-    background: orange;
+    background: rgb(88, 128, 141);
     height: 70px;
     color: white;
     font-style: italic;
