@@ -82,11 +82,8 @@ const store = new Vuex.Store({
     getLists(state, lists) {
       state.lists = lists
       // state.lists = JSON.parse(lists)//into state lists
-      console.log('mutation:lists',lists)
+      //console.log('mutation:lists',lists)
       //console.log('lists',JSON.stringify(this.$store.state.lists))
-      // state.lists.forEach(list => {
-      //   list.cards=[]
-      // })
       //localStorage.setItem('trello-lists', JSON.stringify(state.lists))
       console.log("mutation:getLists", lists)
     },

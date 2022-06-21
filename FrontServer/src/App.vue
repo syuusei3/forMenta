@@ -27,19 +27,6 @@ export default {
         //this.list = localStorage('trello-lists')
       })
     },
-    /*
-    getCard(){
-      const getCardEndpoint = 'http://localhost:8000/getcard';
-      console.log("getCardEndpoint",getCardEndpoint)
-      axios.get(getCardEndpoint)
-
-      .then((res)=>{
-        console.log("getCard-res",res);
-        localStorage.setItem('trello-lists',JSON.stringify(res.data.todos))
-        this.$store.commit('getCards', res.data.todos)
-      })
-    } 
-    */
   },
   created: function() {
         this.getTodo();

@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.todo3.todo33.entity.TodoCards;
 import com.todo3.todo33.entity.TodoLists;
+import com.todo3.todo33.entity.TodoContents;
 import com.todo3.todo33.mapper.TodoMapper;
 import com.todo3.todo33.model.TodoModel;
 //import com.todo3.todo33.model.TodoModel.Card;
@@ -101,7 +102,7 @@ public class TodoController {
                 cards.forEach(card -> {
                     if(todoModel.list_id == card.list_id) {
                         //todoModel.cards.add(new Card()));
-                        todoModel.cards.add(new TodoModel.Card(card.task_id,card.card_title,card.list_id));
+                        todoModel.cards.add(new TodoModel.Card(card.card_id, card.card_title, card.list_id));
                         System.out.println(todoModel.list_id + ":" + todoModel.list_title + ":" + card.card_title );
                     }
                 });
@@ -160,29 +161,14 @@ public class TodoController {
 			return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
 		}
     }
+
+
     /////////////////////cards///////////////////
-    // @GetMapping("/getcards")
-    // public ResponseEntity<Object> getTodoCards(Model model){
-    //     try {
-    //         List<TodoCards> list = todoMapper.selectAllCards();
-    //         model.addAttribute("todos",list);
-	// 		logger.info("{}", model);
-            
-    //         ObjectMapper mapper = new ObjectMapper();
-    //         String strJson = mapper.writeValueAsString(model);
-
-	// 		return new ResponseEntity<Object>(strJson, HttpStatus.OK);
-
-	// 	} catch(Exception ex) {
-	// 		//logger.error(ex.getMessage(), ex);
-	// 		return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
-	// 	}
-    // }
-
     @PostMapping("/addcards")
     public ResponseEntity<Object> addTodoCards(@RequestBody TodoCards cards){
         try {
             System.out.println("!!!!!!!!!Add cards!!!!!!");
+            System.out.println(cards);
             todoMapper.addCards(cards);
 			return new ResponseEntity<Object>(cards, HttpStatus.OK);
 		} catch(Exception ex) {
@@ -194,7 +180,36 @@ public class TodoController {
     public ResponseEntity<Object> deleteTodoCards(@RequestBody TodoCards cards){
         try {
             System.out.println("!!!!!!!!!Delete cards!!!!!!");
+            System.out.println(cards);
             todoMapper.deleteCards(cards);
+			return new ResponseEntity<Object>(HttpStatus.OK);
+		} catch(Exception ex) {
+			//logger.error(ex.getMessage(), ex);
+			return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
+		}
+    }
+
+    
+
+    /////////////////////Contents///////////////////
+    @PostMapping("/addcontents")
+    public ResponseEntity<Object> addTodoContets(@RequestBody TodoCards contents){
+        try {
+            System.out.println("!!!!!!!!!Add contents!!!!!!");
+            System.out.println(contents);
+            todoMapper.addCards(contents);
+			return new ResponseEntity<Object>(contents, HttpStatus.OK);
+		} catch(Exception ex) {
+			//logger.error(ex.getMessage(), ex);
+			return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
+		}
+    }
+    @PostMapping("/deletecontents")
+    public ResponseEntity<Object> deleteTodoContents(@RequestBody TodoCards contents){
+        try {
+            System.out.println("!!!!!!!!!Delete cards!!!!!!");
+            System.out.println(contents);
+            todoMapper.deleteCards(contents);
 			return new ResponseEntity<Object>(HttpStatus.OK);
 		} catch(Exception ex) {
 			//logger.error(ex.getMessage(), ex);

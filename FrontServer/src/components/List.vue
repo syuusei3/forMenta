@@ -3,13 +3,14 @@
     <div class="listheader">
       <p class="list-title">{{ title }}</p>
       <!-- <p class="list-counter">total: {{ totalCardInList }}</p> -->
-      <div class="deletelist" @click="deleteTodo()">×</div>
+      <div class="deletelist" @click="deleteListTitle()">×</div>
     </div>
     <draggable group="cards"
                :list="cards"
                @end="$emit('change')">
       <Card v-for="(item, index) in cards"
             :card_title="item.card_title"
+            :card_id="item.card_id"
             :key="item.id"
             :cardIndex="index"
             :listID="item.list_id"
@@ -69,7 +70,7 @@ export default {
     //     this.$store.dispatch('removelist', { listIndex: this.listIndex })
     //   }
     // },
-    deleteTodo() {
+    deleteListTitle() {
             const deleteEndpoint = 'http://localhost:8000/deletetodo';
             console.log("DeleteEndPoint",deleteEndpoint)
             //console.log("list",list)

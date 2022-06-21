@@ -17,8 +17,8 @@
     values (#{id},#{title})
   </insert>
   <delete id="deleteLists" parameterType="com.todo3.todo33.entity.TodoLists">
-    <!-- delete from lists where id=#{id} -->
-    delete from lists where title=#{title}
+    delete from lists where id=#{id}
+    <!-- delete from lists where title=#{title} -->
   </delete>
 
 
@@ -29,15 +29,36 @@
   </select>
 
   <insert id="addCards" parameterType="com.todo3.todo33.entity.TodoCards">
-    insert into cards (card_title, list_id)
-    values (#{card_title},#{list_id})
+    insert into cards (card_id, card_title, list_id)
+    values (#{card_id},#{card_title},#{list_id})
     <!-- insert into lists (id,title)
     values (#{id},#{title}) -->
   </insert>
 
   <delete id="deleteCards" parameterType="com.todo3.todo33.entity.TodoCards">
+    delete from cards where card_id=#{card_id}
+    <!-- delete from cards where card_title=#{card_title} -->
+  </delete>
+
+
+
+
+                            <!--     contents       -->
+  <select id="selectAllContents" resultType="com.todo3.todo33.entity.TodoContents">
+    select * from contents
+    <!-- select * from lists LEFT JOIN cards ON lists.id = cards.list_id; -->
+  </select>
+
+  <insert id="addContents" parameterType="com.todo3.todo33.entity.TodoContents">
+    insert into contents (content, card_id)
+    values (#{content},#{card_id})
+    <!-- insert into lists (id,title)
+    values (#{id},#{title}) -->
+  </insert>
+
+  <delete id="deleteContents" parameterType="com.todo3.todo33.entity.TodoContents">
     <!-- delete from lists where id=#{id} -->
-    delete from cards where title=#{card_title}
+    delete from contents where content=#{content}
   </delete>
 
 </mapper>

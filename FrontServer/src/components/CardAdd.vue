@@ -38,6 +38,7 @@ export default {
     return {
       card_title: '',
       list_id:'',
+      card_id:'',
       isEditing: false,
     }
   },
@@ -67,7 +68,7 @@ export default {
       console.log("card title:", this.card_title)
       console.log("List Index:", this.listIndex)
       console.log("List ID:", this.listID)
-      this.$store.dispatch('addCardToList', { card_title: this.card_title, listIndex: this.listIndex, list_id: this.listID })
+      this.$store.dispatch('addCardToList', {card_id: new Date().getTime(), card_title: this.card_title, list_id: this.listID, listIndex: this.listIndex })
       this.card_title = ''
       //console.log('methods addCardToList ListIndex:',this.lists[JSON.stringify(this.listIndex)])
     },
@@ -75,8 +76,9 @@ export default {
       const addCardEndpoint = 'http://localhost:8000/addcards';
       console.log("AddCardEndPoint:",addCardEndpoint)
       //from List.vue
+
       const tmplist = {
-        //task_id : this.listIndex,
+        card_id : new Date().getTime(),//card_id
         card_title : this.card_title,
         list_id : this.listID,
         // card_title : this.title,
