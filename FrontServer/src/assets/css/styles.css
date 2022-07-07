@@ -11,10 +11,10 @@ html {
 
 header {
     background: rgb(88, 128, 141);
-    height: 70px;
+    height: 30px;
     color: white;
     font-style: italic;
-    font-size: 40px;
+    font-size: 30px;
     text-align: left;
     padding: 20px;
 }
@@ -44,7 +44,7 @@ main {
 }
 
 .text-input {
-    padding: 20px 15px;
+    padding: 20px 10px;
     width: calc(100% - 30px);
     background-color: #ccc;
     border-radius: 8px;
@@ -94,7 +94,7 @@ main {
 }
 
 .list {
-    margin: 0 5px auto;
+    margin: 0 3px auto;
     position: relative;
     display: inline-block;
     flex-direction: column;
@@ -118,7 +118,7 @@ main {
 .list-title {
     font-size: 20px;
     font-weight: bold;
-    padding: 15px;
+    padding: 5px;
 }
 
 .list-counter {

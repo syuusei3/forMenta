@@ -27,7 +27,10 @@ import com.todo3.todo33.entity.TodoLists;
 import com.todo3.todo33.entity.TodoContents;
 import com.todo3.todo33.mapper.TodoMapper;
 import com.todo3.todo33.model.TodoModel;
-//import com.todo3.todo33.model.TodoModel.Card;
+
+
+import com.todo3.todo33.model.TodoModel.Card;
+import com.todo3.todo33.model.TodoModel.Card.Content;
 
 import java.util.Map;
 import java.util.Arrays;
@@ -88,49 +91,55 @@ public class TodoController {
     //public TodoResponse getTodo(Model model/){
         public ResponseEntity<List<TodoModel>> getTodo(){
 
-            List<TodoLists> lists = todoMapper.selectAllLists();//id,title
-            List<TodoCards> cards = todoMapper.selectAllCards();//task_id,card_title,list_id
+            List<TodoLists> listsList = todoMapper.selectAllLists();//id,title
+            List<TodoCards> cardsList = todoMapper.selectAllCards();//task_id,card_title,list_id
+            List<TodoContents> contentsList = todoMapper.selectAllContents();//id,title
             List<TodoModel> tmpList = new ArrayList<TodoModel>();
+
+
+            // TodoModel.Card c = new TodoModel.Card(card.card_id, card.card_title, card.list_id);
+            // todoModel.cards.add(c);
             //List<Card> tmpcard = new ArrayList<Card>();
 
-            lists.forEach(list -> {
+            listsList.forEach(list -> {
                 tmpList.add(new TodoModel(list.id, list.title));    
             });
 
             System.out.println("!!!!!!!!!Send Lists !!!!!!");
             tmpList.forEach(todoModel -> {
-                cards.forEach(card -> {
+                cardsList.forEach(card -> {
                     if(todoModel.list_id == card.list_id) {
-                        //todoModel.cards.add(new Card()));
                         todoModel.cards.add(new TodoModel.Card(card.card_id, card.card_title, card.list_id));
+                        
+                        // contentsList.forEach(content ->{
+                        //     if(card.card_id == content.card_id){
+                        //         //content.add(new TodoModel.Card.Content(content.content_id, content.content, content.card_id));
+                        //         todoModel.cards.forEach(tmpCard -> {
+                        //             tmpCard.contents.add(new TodoModel.Card.Content(content.content_id, content.content, content.card_id));
+
+                        //         });
+
+                        //     }
+                        // });
+                        
                         System.out.println(todoModel.list_id + ":" + todoModel.list_title + ":" + card.card_title );
                     }
                 });
             });
+            
+            tmpList.forEach(todoModel -> {
+            todoModel.cards.forEach(tmpCard -> {
+                contentsList.forEach(content ->{
+                            //content.add(new TodoModel.Card.Content(content.content_id, content.content, content.card_id));
+                                if(tmpCard.card_id == content.card_id){
+                                tmpCard.contents.add(new TodoModel.Card.Content(content.content_id, content.content, content.card_id));
+                                }
+                            });
+                    });
+            });
+            
 
             return new ResponseEntity<List<TodoModel>>(tmpList, HttpStatus.OK);
-/* 
-            
-
-/* 
-            List<TodoLists> lists = todoMapper.selectAllLists();
-            List<TodoCards> cards = todoMapper.selectAllCards();//selectALL into list
-
-            //logger.info("{}", lists);
-            System.out.printf("!!!!!!!!!Lists todos!!!!!!");
-            lists.forEach(list -> logger.info("{}",list));
-
-            System.out.printf("!!!!!!!!!Lists model!!!!!!");
-
-            model.addAttribute("todos",lists);
-			logger.info("{}", model);
-            
-            ObjectMapper mapper = new ObjectMapper();
-            String strJson = mapper.writeValueAsString(model);//genarate json
-
-			return new ResponseEntity<Object>(strJson, HttpStatus.OK);
-
-            */
 
 		//} catch(Exception ex) {
 			//logger.error(ex.getMessage(), ex);
@@ -189,15 +198,15 @@ public class TodoController {
 		}
     }
 
-    
+
 
     /////////////////////Contents///////////////////
     @PostMapping("/addcontents")
-    public ResponseEntity<Object> addTodoContets(@RequestBody TodoCards contents){
+    public ResponseEntity<Object> addTodoContents(@RequestBody TodoContents contents){
         try {
             System.out.println("!!!!!!!!!Add contents!!!!!!");
             System.out.println(contents);
-            todoMapper.addCards(contents);
+            todoMapper.addContents(contents);
 			return new ResponseEntity<Object>(contents, HttpStatus.OK);
 		} catch(Exception ex) {
 			//logger.error(ex.getMessage(), ex);
@@ -205,11 +214,11 @@ public class TodoController {
 		}
     }
     @PostMapping("/deletecontents")
-    public ResponseEntity<Object> deleteTodoContents(@RequestBody TodoCards contents){
+    public ResponseEntity<Object> deleteTodoContents(@RequestBody TodoContents contents){
         try {
             System.out.println("!!!!!!!!!Delete cards!!!!!!");
             System.out.println(contents);
-            todoMapper.deleteCards(contents);
+            todoMapper.deleteContents(contents);
 			return new ResponseEntity<Object>(HttpStatus.OK);
 		} catch(Exception ex) {
 			//logger.error(ex.getMessage(), ex);

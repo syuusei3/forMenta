@@ -11,8 +11,9 @@
       <Card v-for="(item, index) in cards"
             :card_title="item.card_title"
             :card_id="item.card_id"
-            :key="item.id"
+            :key="item.card_id"
             :cardIndex="index"
+            :contents="item.contents"
             :listID="item.list_id"
             :listIndex="listIndex"
       />
@@ -26,6 +27,7 @@ import draggable from 'vuedraggable'
 import CardAdd from './CardAdd'
 import Card from './Card'
 import axios from 'axios'
+
 export default {
   components: {
     CardAdd,
@@ -78,6 +80,8 @@ export default {
             console.log("list title:",this.title)
             console.log("listt ID:",this.listID)
             console.log("delete key:",this.key)
+            console.log("delete cards:",this.cards)
+            console.log("show cards.contents:",this.cards.contents)
             //console.log("key",this.key)
             if(confirm('本当にこのリストを削除しますか？')){
               const tmplist = {

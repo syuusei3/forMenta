@@ -23,8 +23,8 @@ public interface TodoMapper {
 
     ///////cards//////
     public List<TodoContents> selectAllContents();
-    public void addContents(TodoContents contents); //addCards
-    public void deleteContents(TodoContents contents);//deleteCards
+    public void addContents(TodoContents contents); //addContents
+    public void deleteContents(TodoContents contents);//deleteContents
 }
 
 

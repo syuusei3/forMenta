@@ -50,14 +50,14 @@
   </select>
 
   <insert id="addContents" parameterType="com.todo3.todo33.entity.TodoContents">
-    insert into contents (content, card_id)
-    values (#{content},#{card_id})
+    insert into contents (content_id, content, card_id)
+    values (#{content_id}, #{content}, #{card_id})
     <!-- insert into lists (id,title)
     values (#{id},#{title}) -->
   </insert>
 
   <delete id="deleteContents" parameterType="com.todo3.todo33.entity.TodoContents">
-    <!-- delete from lists where id=#{id} -->
+    <!-- delete from lists where content_id=#{content_id} -->
     delete from contents where content=#{content}
   </delete>
 

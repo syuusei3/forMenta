@@ -49,6 +49,10 @@ const store = new Vuex.Store({
       console.log('action:removeCardFromList executed.')
       context.commit('removeCardFromList', payload)
     },
+    addContentToCard(context, payload) {
+      console.log('action:addContentToCard executed.')
+      context.commit('addContentToCard', payload)
+    },
     updateList(context, payload) {
       console.log('action:updateList executed.')
       context.commit('updateList', payload)
@@ -66,13 +70,19 @@ const store = new Vuex.Store({
     },
     addCardToList(state, payload) {
       //state.lists[payload.listIndex].cards.push({ body: payload.body })
-      state.lists[payload.listIndex].cards.push({ card_id : payload.card_id, card_title: payload.card_title, list_id : payload.list_id })
+      state.lists[payload.listIndex].cards.push({ card_id : payload.card_id, card_title: payload.card_title, list_id : payload.list_id, contents:[] })
       //localStorage.setItem('trello-lists', JSON.stringify(state.lists))
       console.log('mutation:addCardToList',state.lists,':',savedLists)
     },
     removeCardFromList(state, payload) {
       state.lists[payload.listIndex].cards.splice(payload.cardIndex, 1)
       console.log('mutation:removeCardFromList',state.lists)
+    },
+    addContentToCard(state, payload) {
+      //state.lists[payload.listIndex].cards.push({ body: payload.body })
+      state.lists[payload.listIndex].cards[payload.cardIndex].contents.push({ content_id: payload.content_id, content: payload.content, card_id : payload.card_id })
+      //localStorage.setItem('trello-lists', JSON.stringify(state.lists))
+      console.log('mutation:addCardToList',state.lists,':',savedLists)
     },
     updateList(state, payload) {
       state.lists = payload.lists
@@ -104,7 +114,7 @@ const store = new Vuex.Store({
 store.subscribe((mutation, state) => {
   localStorage.setItem('trello-lists', JSON.stringify(state.lists))
 
-  console.log('subscribe:savedLists',savedLists)
+  //console.log('subscribe:savedLists',savedLists)// savedList
 })
 
 export default store//export to main.js

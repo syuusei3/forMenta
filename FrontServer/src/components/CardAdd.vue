@@ -3,7 +3,7 @@
     <input v-model="card_title"
            type="text"
            class="text-input"
-           placeholder="Add new card"
+           placeholder="+Add new card"
            @focusin="startEditing"
            @focusout="finishEditing"
            @keypress.enter="addCardTitle()"
@@ -84,6 +84,7 @@ export default {
         // card_title : this.title,
         //content:this.content
       }
+      console.log("###send cards######:",tmplist)
       axios.post(addCardEndpoint,tmplist)//post to DB
       //this.$emit('addList')///event for reload
     },
