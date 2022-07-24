@@ -1,17 +1,16 @@
 <template>
   <div id="app">
-    <Board/>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import Board from './components/Board.vue'
+//import Board from './components/Board.vue'
 import axios from 'axios'
 
 export default {
   name: 'App',
   components: {
-    Board
   },
   methods:{
     getTodo(){

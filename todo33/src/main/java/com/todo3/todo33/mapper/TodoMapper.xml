@@ -61,4 +61,11 @@
     delete from contents where content=#{content}
   </delete>
 
+
+                              <!--     Login      -->
+  <select id="addAccounts" parameterType="com.todo3.todo33.entity.AccountInfo">
+    insert into users (name, email, pass)
+    values (#{name}, #{email}, #{password})
+  </select>
+
 </mapper>

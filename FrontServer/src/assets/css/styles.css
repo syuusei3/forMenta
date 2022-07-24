@@ -19,12 +19,17 @@ header {
     padding: 20px;
 }
 
+
 main {
     padding: 0 10px;
     width: calc(100% - 40px);
     height: 100%;
 }
 
+img.home{
+    width:30%;
+    height:30%;
+}
 .info-line {
     margin: 20px;
     font-size: 20px;
@@ -171,8 +176,9 @@ main {
 }
 
 
-
-
+.central-home {
+    text-align: center;
+}
 
 
 

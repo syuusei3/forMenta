@@ -25,12 +25,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.todo3.todo33.entity.TodoCards;
 import com.todo3.todo33.entity.TodoLists;
 import com.todo3.todo33.entity.TodoContents;
+import com.todo3.todo33.entity.AccountInfo;
 import com.todo3.todo33.mapper.TodoMapper;
 import com.todo3.todo33.model.TodoModel;
 
 
-import com.todo3.todo33.model.TodoModel.Card;
-import com.todo3.todo33.model.TodoModel.Card.Content;
 
 import java.util.Map;
 import java.util.Arrays;
@@ -220,6 +219,20 @@ public class TodoController {
             System.out.println(contents);
             todoMapper.deleteContents(contents);
 			return new ResponseEntity<Object>(HttpStatus.OK);
+		} catch(Exception ex) {
+			//logger.error(ex.getMessage(), ex);
+			return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
+		}
+    }
+
+    /////////////////////Login///////////////////
+    @PostMapping("/addaccount")
+    public ResponseEntity<Object> addTodoAccounts(@RequestBody AccountInfo info){
+        try {
+            System.out.println("!!!!!!!!!New Accounts!!!!!!");
+            System.out.println(info);
+            todoMapper.addAccounts(info);
+			return new ResponseEntity<Object>(info, HttpStatus.OK);
 		} catch(Exception ex) {
 			//logger.error(ex.getMessage(), ex);
 			return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
