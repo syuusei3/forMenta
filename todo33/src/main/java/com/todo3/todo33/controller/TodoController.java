@@ -31,14 +31,14 @@ import com.todo3.todo33.model.TodoModel;
 
 
 
-import java.util.Map;
-import java.util.Arrays;
-import java.util.HashMap;
+// import java.util.Map;
+// import java.util.Arrays;
+// import java.util.HashMap;
 import java.util.ArrayList;
 
 
 //@CrossOrigin(origins = "http://localhost:8080")
-@CrossOrigin(origins = "http://localhost:8082")
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 public class TodoController {
 
@@ -226,13 +226,32 @@ public class TodoController {
     }
 
     /////////////////////Login///////////////////
+    @PostMapping("/login")
+    public ResponseEntity<Object> cheackTodoAccounts(@RequestBody AccountInfo info){
+        try {
+            System.out.println("!!!!!!!!!New Accounts!!!!!!");
+            System.out.println(info);
+            List<AccountInfo> accountList = todoMapper.selectAllUsers();
+
+            accountList.forEach(tmpUser ->{
+                if(tmpUser.email==info.email && tmpUser.password==info.password){
+                    
+                }
+            });
+
+			return new ResponseEntity<Object>(info.id, HttpStatus.OK);
+		} catch(Exception ex) {
+			//logger.error(ex.getMessage(), ex);
+			return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
+		}
+    }
     @PostMapping("/addaccount")
     public ResponseEntity<Object> addTodoAccounts(@RequestBody AccountInfo info){
         try {
             System.out.println("!!!!!!!!!New Accounts!!!!!!");
             System.out.println(info);
-            todoMapper.addAccounts(info);
-			return new ResponseEntity<Object>(info, HttpStatus.OK);
+            todoMapper.addUsers(info);
+			return new ResponseEntity<Object>(info.email, HttpStatus.OK);
 		} catch(Exception ex) {
 			//logger.error(ex.getMessage(), ex);
 			return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);

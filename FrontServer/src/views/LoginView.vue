@@ -44,11 +44,13 @@ export default {
             axios.post(loginEndpoint, userCredential)
             .then((res) => {
                 console.log(res)
-                this.msg = res.data.msg
-                localStorage.setItem('admin_token',JSON.stringify(res.data.admin_token))
-                if(res.data.authorized) {
-                    this.$router.push('/board')
-                }
+                this.$router.push('/board')
+                //this.$router.push('/board', JSON.stringify(res))
+                // this.msg = res.data.msg
+                // localStorage.setItem('admin_token',JSON.stringify(res.data.admin_token))
+                // if(res.data.authorized) {
+                //     this.$router.push('/board')
+                // }
             })
             .catch((err) => {
                 console.log(err)

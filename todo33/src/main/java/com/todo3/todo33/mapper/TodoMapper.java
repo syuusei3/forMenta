@@ -1,6 +1,6 @@
 package com.todo3.todo33.mapper;
 import java.util.List;
-import javax.sql.rowset.CachedRowSet;
+//import javax.sql.rowset.CachedRowSet;
 import org.apache.ibatis.annotations.Mapper;
 
 
@@ -28,7 +28,8 @@ public interface TodoMapper {
     public void deleteContents(TodoContents contents);//deleteContents
 
     ///////Login//////
-    public void addAccounts(AccountInfo info); //addContents
+    public List<AccountInfo> selectAllUsers();
+    public void addUsers(AccountInfo info); //addContents
    
 }
 

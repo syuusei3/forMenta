@@ -63,7 +63,13 @@
 
 
                               <!--     Login      -->
-  <select id="addAccounts" parameterType="com.todo3.todo33.entity.AccountInfo">
+
+  <select id="selectAllUsers" resultType="com.todo3.todo33.entity.AccountInfo">
+    select * from users
+    <!-- select * from lists LEFT JOIN cards ON lists.id = cards.list_id; -->
+  </select>
+
+  <select id="addUsers" parameterType="com.todo3.todo33.entity.AccountInfo">
     insert into users (name, email, pass)
     values (#{name}, #{email}, #{password})
   </select>
