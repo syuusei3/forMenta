@@ -54,6 +54,12 @@ public class TodoController {
 
     @Autowired
     TodoMapper todoMapper;
+
+    @GetMapping("/logintest")
+    public String test() {
+        return "Hello World!!";
+    }
+
     
     @RequestMapping(value="/")
     public String index(Model model) {
@@ -234,10 +240,10 @@ public class TodoController {
     }
 
     /////////////////////Login///////////////////
-    @GetMapping("/login")
-    public ResponseEntity<Object> showLoginForm(){
-        return new ResponseEntity<Object>(HttpStatus.OK);
-    }
+//    @GetMapping("/login")
+//    public ResponseEntity<Object> showLoginForm(){
+//        return new ResponseEntity<Object>(HttpStatus.OK);
+//    }
     // @Autowired
 	// private AuthenticationManager authenticationManager;
 
