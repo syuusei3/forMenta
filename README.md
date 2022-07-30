@@ -28,6 +28,9 @@ npm run serve
 ```
 node --version 
 #v16.14.2
+
+java --version
+#openjdk version "11.0.15.0.1" 2022-04-19 LTS
 ```
 
 
