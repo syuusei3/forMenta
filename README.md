@@ -10,7 +10,9 @@ PostgreSQL
 
 ## Project setup
 
-do it this commands on "/FrontServer/.."
+1, you need to set up PostgreSQL
+
+2, do it this commands on "/FrontServer/.."
 ```
 npm install
 or
@@ -20,6 +22,12 @@ npm i
 ### Compiles and hot-reloads for FrontServer
 ```
 npm run serve
+```
+
+### test environment
+```
+node --version 
+#v16.14.2
 ```
 
 
