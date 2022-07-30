@@ -29,12 +29,20 @@ import com.todo3.todo33.entity.AccountInfo;
 import com.todo3.todo33.mapper.TodoMapper;
 import com.todo3.todo33.model.TodoModel;
 
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
+
 
 
 // import java.util.Map;
 // import java.util.Arrays;
 // import java.util.HashMap;
 import java.util.ArrayList;
+
 
 
 //@CrossOrigin(origins = "http://localhost:8080")
@@ -226,25 +234,27 @@ public class TodoController {
     }
 
     /////////////////////Login///////////////////
-    @PostMapping("/login")
-    public ResponseEntity<Object> cheackTodoAccounts(@RequestBody AccountInfo info){
-        try {
-            System.out.println("!!!!!!!!!New Accounts!!!!!!");
-            System.out.println(info);
-            List<AccountInfo> accountList = todoMapper.selectAllUsers();
-
-            accountList.forEach(tmpUser ->{
-                if(tmpUser.email==info.email && tmpUser.password==info.password){
-                    
-                }
-            });
-
-			return new ResponseEntity<Object>(info.id, HttpStatus.OK);
-		} catch(Exception ex) {
-			//logger.error(ex.getMessage(), ex);
-			return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
-		}
+    @GetMapping("/login")
+    public ResponseEntity<Object> showLoginForm(){
+        return new ResponseEntity<Object>(HttpStatus.OK);
     }
+    // @Autowired
+	// private AuthenticationManager authenticationManager;
+
+    // @PostMapping("/login")
+    // public ResponseEntity<Object> cheackTodoAccounts(@RequestBody AccountInfo user) throws Exception {
+		
+	// 	Authentication authObject = null;
+	// 	try {
+	// 		authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword()));
+	// 		SecurityContextHolder.getContext().setAuthentication(authObject);
+	// 	} catch (BadCredentialsException e) {
+	// 		throw new Exception("Invalid credentials");
+	// 	}
+		
+	// 	return new ResponseEntity<Object>(HttpStatus.OK);
+	// }
+
     @PostMapping("/addaccount")
     public ResponseEntity<Object> addTodoAccounts(@RequestBody AccountInfo info){
         try {

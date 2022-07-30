@@ -27,6 +27,7 @@
 import draggable from 'vuedraggable'
 import ListAdd from './ListAdd.vue'
 import List from './List'
+import axios from 'axios'
 import { mapState } from 'vuex'  ///mapstate
 export default {
   components: {
@@ -52,7 +53,24 @@ export default {
     addList(){
       console.log('Boardvue Addlist Event')
       this.$emit('addList')///event for reload
-    }
+    },
+    getTodo(){
+      const getEndpoint = 'http://localhost:8000/gettodo';
+      console.log("getEndPoint",getEndpoint)
+      axios.get(getEndpoint)
+      .then((res)=> {
+        //this.lists = res.data.lists;
+        console.log("first-res",res);
+        localStorage.removeItem('trello-lists')
+        localStorage.setItem('trello-lists',JSON.stringify(res.data))//into localstorage
+        this.$store.commit('getLists', res.data)//good
+        //this.list = localStorage('trello-lists')
+      })
+    },
   },
+  created: function() {
+        //this.getTodo();
+        //setInterval(this.$store.commit('getLists', this.lists), 1000)
+    }, 
 }
 </script>

@@ -4,8 +4,8 @@
         <div class="login-form">
             <form>
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="email">
+                    <label for="exampleInputEmail1" class="form-label">User name</label>
+                    <input type="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" v-model="username">
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Password</label>
@@ -24,6 +24,7 @@ import axios from 'axios';
 export default {
     data: function() {
         return {
+            username: '',
             email: '',
             password: '',
             userCredential: '',
@@ -33,17 +34,25 @@ export default {
     methods: {
         login() {
             // ログインに使用するユーザーの認証情報をjsonで作成
-            const userCredential = {
-                email: this.email,
-                password: this.password
-            }
-            this.userCredential = userCredential
 
+            // const userCredential = {
+            //     username: this.username,
+            //     password: this.password
+            // }
             // ログインを行うHTTPリクエスト
             const loginEndpoint ='http://localhost:8000/login';
-            axios.post(loginEndpoint, userCredential)
+
+            // console.log("Login",userCredential)
+            //chage content-type
+
+            const params = new URLSearchParams();
+            params.append('usernaem', this.username);
+            params.append("password", this.password);
+            // axios.post(loginEndpoint, userCredential)
+            axios.post(loginEndpoint, params)
+
             .then((res) => {
-                console.log(res)
+                console.log("Response",res)
                 this.$router.push('/board')
                 //this.$router.push('/board', JSON.stringify(res))
                 // this.msg = res.data.msg
@@ -53,6 +62,7 @@ export default {
                 // }
             })
             .catch((err) => {
+                alert("Login error")
                 console.log(err)
             })
         },
