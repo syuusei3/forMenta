@@ -1,8 +1,9 @@
 package com.todo3.todo33.config;
 
 import java.util.Arrays;
-import java.util.List;
 
+import com.todo3.todo33.handler.AuthenticationSuccessHandler;
+import com.todo3.todo33.handler.FailureHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -21,11 +22,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .anyRequest().authenticated()//それ以外のリクエストは認証必要
             .and()
             .formLogin()
+                .successHandler(new AuthenticationSuccessHandler())
+                .failureHandler(new FailureHandler())
             .loginPage("/login")//loginPageのパス
-            //.defaultSuccessUrl("/board", true)
+//            .defaultSuccessUrl("/board", true)
             .and()
-            // .exceptionHandling()
-            // .accessDeniedHandler("")
             .csrf().disable()
             .cors()
             .configurationSource(this.corsConfigurationSource());

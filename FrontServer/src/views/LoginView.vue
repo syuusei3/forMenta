@@ -46,8 +46,9 @@ export default {
             //chage content-type
 
             const params = new URLSearchParams();
-            params.append('usernaem', this.username);
+            params.append('username', this.username); //すみません、ここのusernameがスペルミスしてました...
             params.append("password", this.password);
+
             // axios.post(loginEndpoint, userCredential)
             axios.post(loginEndpoint, params)
 
